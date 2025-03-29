@@ -9,13 +9,13 @@ class EmailBackend(BaseBackend):
         """
         Authenticate a user based on email and password.
         """
-        User = get_user_model()  # Get the custom user model
+        User = get_user_model()                   # Get the custom user model
         try:
             user = User.objects.get(email=email)  # Retrieve user by email
-            if user.check_password(password):  # Verify the provided password
-                return user  # Return the authenticated user
+            if user.check_password(password):     # Verify the provided password
+                return user                       # Return the authenticated user
         except User.DoesNotExist:
-            return None  # Return None if the user does not exist or login  fails
+            return None                           # Return None if the user does not exist or login  fails
 
     def get_user(self, user_id):
         """
@@ -26,5 +26,5 @@ class EmailBackend(BaseBackend):
         try:
             return User.objects.get(pk=user_id)  # Retrieve user by ID
         except User.DoesNotExist:
-            return None  # Return None if the user is not found
+            return None                          # Return None if the user is not found
 

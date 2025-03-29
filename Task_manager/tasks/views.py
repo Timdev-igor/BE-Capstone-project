@@ -45,7 +45,7 @@ def logout_view(request):
     """
     Logs out the user and redirects them to the login page.
     """
-    logout(request)  # Log out the user
+    logout(request)           # Log out the user
     return redirect('login')  # Redirect to the login page
 
 # Home View (Requires  user Login)

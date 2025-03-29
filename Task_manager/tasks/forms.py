@@ -22,7 +22,7 @@ class CustomUserCreationForm(UserCreationForm):
         email = self.cleaned_data.get("email")               # Get the email from form data
         if CustomUser.objects.filter(email=email).exists():  # Check if email already exists
             raise forms.ValidationError("A user with this email already exists.")  # Raise error if duplicate
-        return email  # Return the validated email
+        return email                                         # Return the validated email
 
 
 # Custom User Login Form
@@ -36,5 +36,5 @@ class CustomUserLoginForm(AuthenticationForm):
         widget=forms.EmailInput(attrs={"autofocus": True})  
     )
     class Meta:
-        model = CustomUser  # Use the custom user model
+        model = CustomUser                 # Use the custom user model
         fields = ['username', 'password']  # Fields required for login
