@@ -55,7 +55,7 @@ ROOT_URLCONF = 'Task_manager.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"], #show template directory
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,3 +122,16 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'tasks.CustomUser' #to use the custom user created
+AUTHENTICATION_BACKENDS = [
+    'tasks.authentications.EmailBackend',  # Custom email login backend
+    
+]
+
+#This defines the URL where users will be redirected 
+#if they try to access a restricted page without being logged in.
+LOGIN_URL = '/tasks/login/'
+#After a user successfully logs in, Django will redirect them to this URL by default.
+LOGIN_REDIRECT_URL = '/tasks/home/' 
+#When a user logs out, they will be redirected to this URL.
+LOGOUT_REDIRECT_URL = '/tasks/login/'
