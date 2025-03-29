@@ -35,7 +35,6 @@ class CustomUserLoginForm(AuthenticationForm):
         label="Email", 
         widget=forms.EmailInput(attrs={"autofocus": True})  
     )
-
     class Meta:
         model = CustomUser  # Use the custom user model
         fields = ['username', 'password']  # Fields required for login
