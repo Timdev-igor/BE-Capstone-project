@@ -51,3 +51,34 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email                            #Returns the email as the string representation of the user.
+    
+#creating task models
+class Task(models.Model):
+    # Category choices
+    PRIORITY_CHOICES = [
+        ('LOW', 'Low'),
+        ('MEDIUM', 'Medium'),
+        ('HIGH', 'High'),
+    ]
+    STATUS_CHOICES = [
+        ('COMPLETE', 'Complete'),
+        ('INCOMPLETE', 'Incomplete'),
+    ]
+    title = models.CharField(max_length=200)
+    description = models.TextField(blank=True, null=True)
+    status = models.BooleanField(  choices= STATUS_CHOICES ,default='INCOMPLETE')  # False=Incomplete, True=Complete
+    due_date = models.DateTimeField(blank=True, null=True)
+    priority = models.CharField(max_length=10,choices=PRIORITY_CHOICES,default='MEDIUM')
+    user = models.ForeignKey( CustomUser, on_delete=models.CASCADE, related_name='tasks')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-due_date']  #tasks first by date due
+
+
+    def __str__(self):
+        return f"{self.title} - {self.status_display()}"
+
+    def status_display(self):
+        return "Complete" if self.status else "Incomplete"
