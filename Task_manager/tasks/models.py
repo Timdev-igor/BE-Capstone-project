@@ -39,7 +39,7 @@ class CustomUserManager(BaseUserManager):
     
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
-    username = models.CharField(max_length=150, unique=True) #username
+    username = models.CharField( max_length=150, null=True, blank=True ,default='username') #username
     is_active = models.BooleanField(default=True)    #Determines whether a user’s account is active.or user wont be able to log
     is_staff = models.BooleanField(default=False)    #Defines whether a user has access to the Django admin panel.
     date_joined = models.DateTimeField(auto_now_add=True)#Automatically stores the timestamp when a user registers.
@@ -47,7 +47,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     objects = CustomUserManager()                    #logic for creating users (create_user) and superusers (create_superuser).
 
     USERNAME_FIELD = 'email'                         #Specifies that email will be used as the unique identifier
-    REQUIRED_FIELDS = ['username']                              #REQUIRED_FIELDS defines additional required fields when using createsuperuser.
+    REQUIRED_FIELDS = []                              #REQUIRED_FIELDS defines additional required fields when using createsuperuser.
 
     def __str__(self):
         return self.email                            #Returns the email as the string representation of the user.

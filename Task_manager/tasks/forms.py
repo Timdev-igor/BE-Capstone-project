@@ -11,18 +11,19 @@ class CustomUserCreationForm(UserCreationForm):
     """
     class Meta:
         model = CustomUser                            # Use the custom user model
-        fields = ['email', 'password1', 'password2']  # Fields included in the form
+        fields = ['email',  'username', 'password1', 'password2']  # Fields included in the form
 
     def clean_email(self):
-        """
-        Validates the email field:
-        - Ensures that the email is unique.
-        - Raises a validation error if the email is already in use.
-        """
-        email = self.cleaned_data.get("email")               # Get the email from form data
-        if CustomUser.objects.filter(email=email).exists():  # Check if email already exists
-            raise forms.ValidationError("A user with this email already exists.")  # Raise error if duplicate
-        return email                                         # Return the validated email
+        email = self.data.get('email')  # Directly access form data
+        if CustomUser.objects.filter(email=email).exists():
+            raise forms.ValidationError("This email is already registered.")
+        return email
+
+    def clean_username(self):
+        username = self.data.get('username')  # Directly access form data
+        if CustomUser.objects.filter(username=username).exists():
+            raise forms.ValidationError("This username is taken.")
+        return username                                   
 
 
 # Custom User Login Form

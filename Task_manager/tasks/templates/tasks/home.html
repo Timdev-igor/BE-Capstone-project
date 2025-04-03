@@ -7,7 +7,7 @@
     <p>Manage your tasks efficiently and stay organized.</p>
 
     {% if user.is_authenticated %}
-        <p>Hello, {{ user.email }}! <a href="{% url 'logout' %}">Logout</a></p>
+        <p>Hello, {{ user.username }}! <a href="{% url 'logout' %}">Logout</a></p>
     {% else %}
         <p><a href="{% url 'login' %}">Login</a> or <a href="{% url 'register' %}">Register</a> to get started.</p>
     {% endif %}
