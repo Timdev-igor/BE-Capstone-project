@@ -135,3 +135,7 @@ LOGIN_URL = '/tasks/login/'
 LOGIN_REDIRECT_URL = '/tasks/home/' 
 #When a user logs out, they will be redirected to this URL.
 LOGOUT_REDIRECT_URL = '/tasks/login/'
+
+#deploying
+
+

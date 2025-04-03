@@ -8,21 +8,38 @@ class CustomUserManager(BaseUserManager):
     Custom manager for the CustomUser model.
     Provides helper methods to create regular users and superusers.
     """
-    def create_user(self, email, password=None):
+    def create_user(self, email, username,password=None):
         """
         Creates and returns a regular user with the given email and password.
         """
         if not email:
             raise ValueError('The Email field must be set')  # Ensure email is provided
+        if not username:
+            raise ValueError('The username must be provided')#ensure username is provided
+        
         
         email = self.normalize_email(email)  # Normalizes email (e.g., lowercasing domain part)
-        user = self.model(email=email )  # Create a new user instance
+        user = self.model(email=email, username=username )  # Create a new user instance
         user.set_password(password)  # Hash the password before saving
         user.save(using=self._db)  # Save user to the database
+        return user
+    def create_superuser(self, email, username, password=None):
+        """
+        Creates and saves a superuser with the given email, username and password.
+        """
+        user = self.create_user(
+            email=email,
+            username=username,
+            password=password,
+        )
+        user.is_staff = True
+        user.is_superuser = True
+        user.save(using=self._db)
         return user
     
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
+    username = models.CharField(max_length=150, unique=True) #username
     is_active = models.BooleanField(default=True)    #Determines whether a user’s account is active.or user wont be able to log
     is_staff = models.BooleanField(default=False)    #Defines whether a user has access to the Django admin panel.
     date_joined = models.DateTimeField(auto_now_add=True)#Automatically stores the timestamp when a user registers.
@@ -30,7 +47,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     objects = CustomUserManager()                    #logic for creating users (create_user) and superusers (create_superuser).
 
     USERNAME_FIELD = 'email'                         #Specifies that email will be used as the unique identifier
-    REQUIRED_FIELDS = []                              #REQUIRED_FIELDS defines additional required fields when using createsuperuser.
+    REQUIRED_FIELDS = ['username']                              #REQUIRED_FIELDS defines additional required fields when using createsuperuser.
 
     def __str__(self):
         return self.email                            #Returns the email as the string representation of the user.
