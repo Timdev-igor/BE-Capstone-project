@@ -49,3 +49,4 @@ AUTHENTICATION_BACKENDS = [
 # also define admin to manage users
 ` !!  I HAVE DECIDED TO MAKE CATEGORIES AS A FIELD RATHER THAN A MODEL  !!`
 - created tasks model with its fields in models.py
+- created serialzers.py (used in API )
