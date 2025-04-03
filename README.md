@@ -21,10 +21,10 @@ app=tasks
 - created homeview  where user is led after login in or registration
 
 # urls
-`http://127.0.0.1:8000/tasks/auth/register/`(register)
-`http://127.0.0.1:8000/tasks/auth/login/`
-`http://127.0.0.1:8000/tasks/auth/logout/`
-`http://127.0.0.1:8000/tasks/auth/user/`
+`http://127.0.0.1:8000/tasks/register/`(register)
+`http://127.0.0.1:8000/tasks/login/`(login)
+`http://127.0.0.1:8000/tasks/logout/`(logout)
+`http://127.0.0.1:8000/tasks/user/`     !!undefined!!
 `http://127.0.0.1:8000/tasks/home/`  (require loged in user)
 
 # SETTINGS
@@ -44,3 +44,8 @@ AUTHENTICATION_BACKENDS = [
 ]
 # directory for templates
 'DIRS': [BASE_DIR / "templates"], #show template directory
+
+# WEEK 3 defining a task model and categories /status /creating its views &urls
+# also define admin to manage users
+` !!  I HAVE DECIDED TO MAKE CATEGORIES AS A FIELD RATHER THAN A MODEL  !!`
+- created tasks model with its fields in models.py
