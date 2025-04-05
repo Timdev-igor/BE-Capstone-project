@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import CustomUser  # Import the custom user model
+from .models import CustomUser,Task  # Import the custom user model
 
 # Custom User Registration Form
 class CustomUserCreationForm(UserCreationForm):
@@ -39,3 +39,9 @@ class CustomUserLoginForm(AuthenticationForm):
     class Meta:
         model = CustomUser                 # Use the custom user model
         fields = ['username', 'password']  # Fields required for login
+
+#task
+class TaskForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ['title', 'description', 'status', 'due_date', 'priority']

@@ -6,4 +6,7 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
+    #tasks
+    path('task/create/', views.task_create, name='task_create'),
+
 ]

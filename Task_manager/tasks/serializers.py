@@ -23,3 +23,8 @@ class TaskSerializer(serializers.ModelSerializer):
         if value not in dict(Task.STATUS_CHOICES):
             raise serializers.ValidationError("Status must be either 'Complete' or 'incomplete'")
         return value
+    
+    def update(self, instance, validated_data):
+        if instance.status:  # Task is marked complete
+            raise serializers.ValidationError("Cannot update a completed task.")
+        return super().update(instance, validated_data)

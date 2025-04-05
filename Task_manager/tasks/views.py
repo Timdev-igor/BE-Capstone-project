@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 # Create your views here.
 from django.contrib.auth import login, authenticate, logout
-from .forms import CustomUserCreationForm 
+from .forms import CustomUserCreationForm ,TaskForm 
 from django.contrib.auth.decorators import  login_required
 
 # User Registration View
@@ -26,7 +26,7 @@ def register(request):
 def login_view(request):
     """
     Handles user login.
-    - If authentication is successful, logs in the user and redirects to home.
+    - If  successful, logs in the user and redirects to home.
     - Otherwise, displays an error message.
     """
     if request.method == 'POST':
@@ -56,3 +56,17 @@ def home_view(request):
     - The @login_required decorator ensures only authenticated users can access this view.
     """
     return render(request, 'tasks/home.html')  # Render the home page
+
+#task normal views
+@login_required
+def task_create(request):
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.user = request.user
+            task.save()
+            return redirect('task_list')
+    else:
+        form = TaskForm()
+    return render(request, 'tasks/task_form.html', {'form': form})
