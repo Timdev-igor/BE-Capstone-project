@@ -8,6 +8,7 @@
 
     {% if user.is_authenticated %}
         <p>Hello, {{ user.username }}! <a href="{% url 'logout' %}">Logout</a></p>
+        <p><a href="{% url 'task_create' %}">Create a New Task</a></p> 
     {% else %}
         <p><a href="{% url 'login' %}">Login</a> or <a href="{% url 'register' %}">Register</a> to get started.</p>
     {% endif %}
