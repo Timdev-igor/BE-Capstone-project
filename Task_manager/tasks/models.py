@@ -74,7 +74,7 @@ class Task(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['-due_date']  #tasks first by date due
+        ordering = ['priority','-due_date']  #tasks first by priority then date due
 
 
     def __str__(self):
