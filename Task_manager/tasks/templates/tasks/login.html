@@ -1,22 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-</head>
-<body>
-    <h1>Login</h1>
-    <form method="post">
-        {% csrf_token %}
-        <label for="email">Email:</label>
-        <input type="email" name="email" required>
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" name="password" required>
-        <br>
-        <button type="submit">Login</button>
-    </form>
-    {% if error %}
-        <p style="color: red;">{{ error }}</p>
-    {% endif %}
-</body>
-</html>
+{% extends 'tasks/base.html' %}
+
+{% block title %}Login - Django Task Manager{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>Login</h2>
+        <form method="post" class="task-form">
+            {% csrf_token %}
+            <label for="email">Email:</label>
+            <input type="email" name="email" placeholder="Enter your email" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" name="password" placeholder="Enter your password" required>
+            
+            <button type="submit">Login</button>
+        </form>
+
+        {% if error %}
+            <p style="color: red; text-align: center; margin-top: 10px;">{{ error }}</p>
+        {% endif %}
+
+        <div style="text-align: center; margin-top: 20px;">
+            <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+        </div>
+    </div>
+{% endblock %}

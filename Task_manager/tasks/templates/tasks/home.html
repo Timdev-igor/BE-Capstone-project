@@ -3,13 +3,17 @@
 {% block title %}Home - Django Task Manager{% endblock %}
 
 {% block content %}
-    <h2>Welcome to the Django Task Manager</h2>
-    <p>Manage your tasks efficiently and stay organized.</p>
+    <div class="task-welcome">
+        <h2>Welcome to the Django ..Task Manager</h2>
+        <p>Manage your tasks efficiently and stay organized.</p>
 
-    {% if user.is_authenticated %}
-        <p>Hello, {{ user.username }}! <a href="{% url 'logout' %}">Logout</a></p>
-        <p><a href="{% url 'task_create' %}">Create a New Task</a></p> 
-    {% else %}
-        <p><a href="{% url 'login' %}">Login</a> or <a href="{% url 'register' %}">Register</a> to get started.</p>
-    {% endif %}
+        {% if user.is_authenticated %}
+            <div class="task-options">
+                <p>Hello, {{ user.username }}! <a href="{% url 'logout' %}">Logout</a></p>
+                <p><a href="{% url 'task_create' %}" class="task-btn">Create a New Task</a></p>
+            </div>
+        {% else %}
+            <p><a href="{% url 'login' %}">Login</a> or <a href="{% url 'register' %}">Register</a> to get started.</p>
+        {% endif %}
+    </div>
 {% endblock %}

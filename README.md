@@ -36,7 +36,7 @@ app=tasks
 `http://127.0.0.1:8000/tasks/api/tasks/{id}/`                    (tasks detail)
 `http://127.0.0.1:8000/tasks/api/tasks/{id}/update/`	         (updating task)
 `http://127.0.0.1:8000/tasks/api/tasks/{id}/delete/`	         (deleting task)
-`http://127.0.0.1:8000/tasks/api/tasks/{id}/toggle-status/`   (checking status)
+
 
 # SETTINGS
 # redirects 
@@ -63,9 +63,6 @@ AUTHENTICATION_BACKENDS = [
 - created serialzers.py (used in API )
 - created CRUD views for tasks model
 - creating tasks api views
+- implemented urls
 
-## Stretch Goals (Optional) ##
- - **Recurring Tasks**Add the option to create recurring tasks (e.g., daily, weekly) that automatically regenerate after completion.
- - **Task History**: Store task history to allow users to track completed tasks over time and retrieve a list of completed tasks.
- - **Notifications**: Implement email or in-app notifications to remind users about upcoming due dates or when a task is due soon.
 

@@ -111,8 +111,7 @@ def task_delete(request, pk):
     return render(request, 'tasks/task_delete.html', {'task': task})
 
 #tasks API VIEWS
-# Task List View with Filtering, Searching, Ordering
-# Task List View
+
 class TaskListView(generics.ListAPIView):
     serializer_class = TaskSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -123,7 +122,7 @@ class TaskListView(generics.ListAPIView):
     def get_queryset(self):
         queryset = Task.objects.filter(user=self.request.user)
 
-        # Filtering
+        # Filterinngi
         priority = self.request.query_params.get('priority')
         if priority is not None:
             queryset = queryset.filter(priority=priority)
@@ -139,31 +138,25 @@ class TaskListView(generics.ListAPIView):
         return queryset
 
 
-# Task Detail View
 class TaskDetailView(generics.RetrieveAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
 
 
-# Task Create View
+# Task Create 
 class TaskCreateView(generics.CreateAPIView):
     serializer_class = TaskSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        serializer.save(user=self.request.user ,status='Incomplete')
 
-
-# Task Update View
-
+# Task Update 
 class TaskUpdateView(generics.UpdateAPIView):
     queryset = Task.objects.all()  # Queryset for all tasks
     serializer_class = TaskSerializer  # The serializer class for validating input data
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]  # Permissions
-
-
-
 
 # Task Delete View
 class TaskDeleteView(generics.DestroyAPIView):
@@ -171,22 +164,3 @@ class TaskDeleteView(generics.DestroyAPIView):
     serializer_class = TaskSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
 
-
-# Toggle Task Status
-class TaskToggleStatusView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
-
-    def post(self, request, pk):
-        try:
-            task = Task.objects.get(pk=pk, user=request.user)
-        except Task.DoesNotExist:
-            return Response({'detail': 'Task not found.'}, status=status.HTTP_404_NOT_FOUND)
-
-        task.status = not task.status  # Toggle the status
-        task.completed_at = now() if task.status else None
-        task.save()
-
-        return Response({
-            'detail': f'Task marked as {"complete" if task.status else "incomplete"}',
-            'status': task.status
-        })
