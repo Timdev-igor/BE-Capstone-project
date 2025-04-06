@@ -17,7 +17,7 @@
         {% for task in tasks %}
           <tr>
             <td>{{ task.title }}</td>
-            <td class="status {{ task.status|lower }}">{{ task.status_display }}</td>
+            <td class="status {{ task.status|lower }}">{{ task.get_status_display }}</td>
             <td>{{ task.due_date }}</td>
             <td>{{ task.get_priority_display }}</td>
             <td class="actions">
