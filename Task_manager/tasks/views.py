@@ -4,6 +4,12 @@ from django.contrib.auth import login, authenticate, logout
 from .forms import CustomUserCreationForm ,TaskForm 
 from django.contrib.auth.decorators import  login_required
 from .models import Task
+from .serializers import TaskSerializer
+from .permissions import IsOwnerOrReadOnly
+from rest_framework import generics, permissions, filters, status
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.utils.timezone import now
 
 # User Registration View
 def register(request):
@@ -102,3 +108,87 @@ def task_delete(request, pk):
         task.delete()
         return redirect('task_list')
     return render(request, 'tasks/task_delete.html', {'task': task})
+
+#tasks API VIEWS
+# Task List View with Filtering, Searching, Ordering
+class TaskListView(generics.ListAPIView):
+  
+    serializer_class = TaskSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['title', 'description']
+    ordering_fields = ['priority', 'due_date', 'created_at']
+
+    def get_queryset(self):
+        queryset = Task.objects.filter(user=self.request.user)
+
+        # Filtering
+        priority = self.request.query_params.get('priority')
+        if priority is not None:
+            queryset = queryset.filter(priority=priority)
+
+        status = self.request.query_params.get('status')
+        if status is not None:
+            queryset = queryset.filter(status=status)
+
+        due_date = self.request.query_params.get('due_date')
+        if due_date is not None:
+            queryset = queryset.filter(due_date=due_date)
+
+        return queryset
+
+
+# Task Detail View
+class TaskDetailView(generics.RetrieveAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
+
+
+# Task Create View
+class TaskCreateView(generics.CreateAPIView):
+    serializer_class = TaskSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+# Task Update View
+class TaskUpdateView(generics.UpdateAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
+
+    def perform_update(self, serializer):
+        task = self.get_object()
+        if task.status:
+            raise PermissionDenied("Cannot edit a completed task.")
+        serializer.save()
+
+
+# Task Delete View
+class TaskDeleteView(generics.DestroyAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
+
+
+# Toggle Task Status
+class TaskToggleStatusView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, pk):
+        try:
+            task = Task.objects.get(pk=pk, user=request.user)
+        except Task.DoesNotExist:
+            return Response({'detail': 'Task not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        task.status = not task.status
+        task.completed_at = now() if task.status else None
+        task.save()
+
+        return Response({
+            'detail': f'Task marked as {"complete" if task.status else "incomplete"}',
+            'status': task.status
+        })

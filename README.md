@@ -24,8 +24,12 @@ app=tasks
 `http://127.0.0.1:8000/tasks/register/`(register)
 `http://127.0.0.1:8000/tasks/login/`(login)
 `http://127.0.0.1:8000/tasks/logout/`(logout)
-`http://127.0.0.1:8000/tasks/user/`     !!undefined!!
-`http://127.0.0.1:8000/tasks/home/`  (require loged in user)
+`http://127.0.0.1:8000/tasks/`     (lists tasks)
+`http://127.0.0.1:8000/tasks/home/`  (showes home/ require loged in user)
+`http://127.0.0.1:8000/tasks/create/`(creating new tasks)
+`http://127.0.0.1:8000/tasks/<int:pk>/`(viewing tasks details)
+`http://127.0.0.1:8000/tasks/<int:pk>/edit/`(editing task)
+`http://127.0.0.1:8000/tasks/<int:pk>/delete/`(deleting task)
 
 # SETTINGS
 # redirects 
@@ -50,3 +54,10 @@ AUTHENTICATION_BACKENDS = [
 ` !!  I HAVE DECIDED TO MAKE CATEGORIES AS A FIELD RATHER THAN A MODEL  !!`
 - created tasks model with its fields in models.py
 - created serialzers.py (used in API )
+- created CRUD views for tasks model
+- creating tasks api views
+
+## Stretch Goals (Optional) ##
+ - **Recurring Tasks**Add the option to create recurring tasks (e.g., daily, weekly) that automatically regenerate after completion.
+ - **Task History**: Store task history to allow users to track completed tasks over time and retrieve a list of completed tasks.
+ - **Notifications**: Implement email or in-app notifications to remind users about upcoming due dates or when a task is due soon.

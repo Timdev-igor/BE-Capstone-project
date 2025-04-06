@@ -54,19 +54,20 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     
 #creating task models
 class Task(models.Model):
-    # Category choices
+    # priority choices   list 
     PRIORITY_CHOICES = [
         ('LOW', 'Low'),
         ('MEDIUM', 'Medium'),
         ('HIGH', 'High'),
     ]
+    # status choice list
     STATUS_CHOICES = [
         ('COMPLETE', 'Complete'),
         ('INCOMPLETE', 'Incomplete'),
     ]
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
-    status = models.CharField(max_length=10,choices= STATUS_CHOICES ,default='INCOMPLETE')  # False=Incomplete, True=Complete
+    status = models.CharField(max_length=10,choices= STATUS_CHOICES ,default='INCOMPLETE') 
     due_date = models.DateTimeField(blank=True, null=True)
     priority = models.CharField(max_length=10,choices=PRIORITY_CHOICES,default='MEDIUM')
     user = models.ForeignKey( CustomUser, on_delete=models.CASCADE, related_name='tasks')
