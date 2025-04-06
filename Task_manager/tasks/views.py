@@ -6,10 +6,9 @@ from django.contrib.auth.decorators import  login_required
 from .models import Task
 from .serializers import TaskSerializer
 from .permissions import IsOwnerOrReadOnly
-from rest_framework import generics, permissions, filters, status
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from django.utils.timezone import now
+from rest_framework import generics, permissions, filters
+
+
 
 
 # User Registration View
@@ -32,11 +31,7 @@ def register(request):
 
 # User Login View
 def login_view(request):
-    """
-    Handles user login.
-    - If  successful, logs in the user and redirects to home.
-    - Otherwise, displays an error message.
-    """
+
     if request.method == 'POST':
         email = request.POST['email']  # Get email from POST data
         password = request.POST['password']  # Get password from POST data
@@ -59,14 +54,9 @@ def logout_view(request):
 # Home View (Requires  user Login)
 @login_required
 def home_view(request):
-    """
-    Displays the home page but only for logged-in users.
-    - The @login_required decorator ensures only authenticated users can access this view.
-    """
     return render(request, 'tasks/home.html')  # Render the home page
 
 #task normal views
-
 @login_required
 def task_list(request):                           #list all created tasks
     tasks = Task.objects.filter(user=request.user)# Filter tasks for the logged-in user
@@ -111,7 +101,6 @@ def task_delete(request, pk):
     return render(request, 'tasks/task_delete.html', {'task': task})
 
 #tasks API VIEWS
-
 class TaskListView(generics.ListAPIView):
     serializer_class = TaskSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -122,7 +111,7 @@ class TaskListView(generics.ListAPIView):
     def get_queryset(self):
         queryset = Task.objects.filter(user=self.request.user)
 
-        # Filterinngi
+        # Filterinng
         priority = self.request.query_params.get('priority')
         if priority is not None:
             queryset = queryset.filter(priority=priority)
@@ -137,12 +126,11 @@ class TaskListView(generics.ListAPIView):
 
         return queryset
 
-
+#task details
 class TaskDetailView(generics.RetrieveAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
-
 
 # Task Create 
 class TaskCreateView(generics.CreateAPIView):

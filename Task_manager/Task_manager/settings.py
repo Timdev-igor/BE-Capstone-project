@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tasks.apps.TasksConfig', #added tasks app 
-     'rest_framework',
+     'rest_framework',#added DRF
 ]
 
 MIDDLEWARE = [
@@ -137,7 +137,7 @@ LOGIN_REDIRECT_URL = '/tasks/home/'
 #When a user logs out, they will be redirected to this URL.
 LOGOUT_REDIRECT_URL = '/tasks/login/'
 
-#setting static files
+#settings  static files directory
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]

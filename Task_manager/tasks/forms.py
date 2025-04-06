@@ -45,7 +45,7 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ['title', 'description', 'status', 'due_date', 'priority']
-
+     #Widget for calender inmput
     due_date = forms.DateField(widget=forms.DateInput(attrs={
         'type': 'date',
         
