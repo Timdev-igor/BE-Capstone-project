@@ -3,17 +3,24 @@
 {% block title %}Home - Django Task Manager{% endblock %}
 
 {% block content %}
-    <div class="task-welcome">
-        <h2>Welcome to the Django ..Task Manager</h2>
-        <p>Manage your tasks efficiently and stay organized.</p>
+  <div class="task-welcome">
+    <h2>Welcome to the Django Task Manager</h2>
+    <p>Manage your tasks efficiently and stay organized.</p>
 
-        {% if user.is_authenticated %}
-            <div class="task-options">
-                <p>Hello, {{ user.username }}! <a href="{% url 'logout' %}">Logout</a></p>
-                <p><a href="{% url 'task_create' %}" class="task-btn">Create a New Task</a></p>
-            </div>
-        {% else %}
-            <p><a href="{% url 'login' %}">Login</a> or <a href="{% url 'register' %}">Register</a> to get started.</p>
-        {% endif %}
-    </div>
+    {% if user.is_authenticated %}
+      <div class="task-options">
+        <p>Hello, {{ user.username }}!</p>
+
+        <div class="task-option-links">
+          <a href="{% url 'task_create' %}" class="task-btn">Create a New Task</a>
+          <a href="{% url 'logout' %}" class="task-btn logout-btn">Logout</a>
+        </div>
+      </div>
+    {% else %}
+      <p>
+        <a href="{% url 'login' %}" class="task-btn">Login</a>
+        <a href="{% url 'register' %}" class="task-btn">Register</a>
+      </p>
+    {% endif %}
+  </div>
 {% endblock %}
