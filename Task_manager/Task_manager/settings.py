@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-ytafyg&-)u@ulvn=#a01zir(&h1z&wk*nl=mf2zs73pzaec3rp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['timothyandre.pythonanywhere.com']
 
 
 # Application definition
@@ -131,11 +131,11 @@ AUTHENTICATION_BACKENDS = [
 
 #This defines the URL where users will be redirected 
 #if they try to access a restricted page without being logged in.
-LOGIN_URL = '/tasks/login/'
+LOGIN_URL = '/login/'
 #After a user successfully logs in, Django will redirect them to this URL by default.
-LOGIN_REDIRECT_URL = '/tasks/home/' 
+LOGIN_REDIRECT_URL = '/home/' 
 #When a user logs out, they will be redirected to this URL.
-LOGOUT_REDIRECT_URL = '/tasks/login/'
+LOGOUT_REDIRECT_URL = '/login/'
 
 #settings  static files directory
 STATICFILES_DIRS = [
