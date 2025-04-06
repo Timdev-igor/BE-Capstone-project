@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from django.utils import timezone
 from .models import Task
+from datetime import datetime
 
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,7 +10,7 @@ class TaskSerializer(serializers.ModelSerializer):
 
      # Custom validation to ensure the due date isin the future.
     def validate_due_date(self, value):
-        if value <= timezone.now():
+        if value is not None and value <= datetime.now():
             raise serializers.ValidationError("Due date should be in the future")
         return value
     

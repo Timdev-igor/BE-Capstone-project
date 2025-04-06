@@ -61,3 +61,10 @@ AUTHENTICATION_BACKENDS = [
  - **Recurring Tasks**Add the option to create recurring tasks (e.g., daily, weekly) that automatically regenerate after completion.
  - **Task History**: Store task history to allow users to track completed tasks over time and retrieve a list of completed tasks.
  - **Notifications**: Implement email or in-app notifications to remind users about upcoming due dates or when a task is due soon.
+
+ List Tasks	http://127.0.0.1:8000/api/tasks/	GET
+Create Task	http://127.0.0.1:8000/tasks/api/tasks/create/	POST
+Get Task Detail	http://127.0.0.1:8000/api/tasks/5/	GET
+Update Task	http://127.0.0.1:8000/tasks/api/tasks/5/update/	PUT/PATCH
+Delete Task	http://127.0.0.1:8000/api/tasks/5/delete/	DELETE
+Toggle Complete/Incomplete	http://127.0.0.1:8000/api/tasks/5/toggle-status/

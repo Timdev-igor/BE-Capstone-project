@@ -10,6 +10,7 @@ from rest_framework import generics, permissions, filters, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.utils.timezone import now
+from rest_framework.exceptions import PermissionDenied
 
 # User Registration View
 def register(request):
@@ -111,8 +112,8 @@ def task_delete(request, pk):
 
 #tasks API VIEWS
 # Task List View with Filtering, Searching, Ordering
+# Task List View
 class TaskListView(generics.ListAPIView):
-  
     serializer_class = TaskSerializer
     permission_classes = [permissions.IsAuthenticated]
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
@@ -162,7 +163,7 @@ class TaskUpdateView(generics.UpdateAPIView):
 
     def perform_update(self, serializer):
         task = self.get_object()
-        if task.status:
+        if task.status == 'COMPLETE':  # You can replace 'COMPLETE' with the enum or constant
             raise PermissionDenied("Cannot edit a completed task.")
         serializer.save()
 
@@ -184,7 +185,7 @@ class TaskToggleStatusView(APIView):
         except Task.DoesNotExist:
             return Response({'detail': 'Task not found.'}, status=status.HTTP_404_NOT_FOUND)
 
-        task.status = not task.status
+        task.status = not task.status  # Toggle the status
         task.completed_at = now() if task.status else None
         task.save()
 
