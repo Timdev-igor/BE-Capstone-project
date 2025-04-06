@@ -21,21 +21,21 @@ app=tasks
 - created homeview  where user is led after login in or registration
 
 # urls
-`http://127.0.0.1:8000/tasks/register/`      (register)
-`http://127.0.0.1:8000/tasks/login/`         (login)
-`http://127.0.0.1:8000/tasks/logout/`        (logout)
-`http://127.0.0.1:8000/tasks/`               (lists tasks)
-`http://127.0.0.1:8000/tasks/home/`          (showes home/ require loged in user)
-`http://127.0.0.1:8000/tasks/create/`        (creating new tasks)
-`http://127.0.0.1:8000/tasks/<int:pk>/`      (viewing tasks details)
-`http://127.0.0.1:8000/tasks/<int:pk>/edit/` (editing task)
-`http://127.0.0.1:8000/tasks/<int:pk>/delete/`(deleting task)
+`http://127.0.0.1:8000/register/`      (register)
+`http://127.0.0.1:8000/login/`         (login)
+`http://127.0.0.1:8000/logout/`        (logout)
+`http://127.0.0.1:8000/`               (lists tasks)
+`http://127.0.0.1:8000/home/`          (showes home/ require loged in user)
+`http://127.0.0.1:8000/create/`        (creating new tasks)
+`http://127.0.0.1:8000/<int:pk>/`      (viewing tasks details)
+`http://127.0.0.1:8000/<int:pk>/edit/` (editing task)
+`http://127.0.0.1:8000/<int:pk>/delete/`(deleting task)
 ## API urls
-`http://127.0.0.1:8000/tasks/api/tasks/	 `                       (listtasks)
-`http://127.0.0.1:8000/tasks/api/tasks/create/`  	             (create Task)
-`http://127.0.0.1:8000/tasks/api/tasks/{id}/`                    (tasks detail)
-`http://127.0.0.1:8000/tasks/api/tasks/{id}/update/`	         (updating task)
-`http://127.0.0.1:8000/tasks/api/tasks/{id}/delete/`	         (deleting task)
+`http://127.0.0.1:8000/api/tasks/	 `                       (listtasks)
+`http://127.0.0.1:8000/api/tasks/create/`  	             (create Task)
+`http://127.0.0.1:8000/api/tasks/{id}/`                    (tasks detail)
+`http://127.0.0.1:8000/api/tasks/{id}/update/`	         (updating task)
+`http://127.0.0.1:8000/api/tasks/{id}/delete/`	         (deleting task)
 
 
 # SETTINGS
