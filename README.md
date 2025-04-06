@@ -21,15 +21,22 @@ app=tasks
 - created homeview  where user is led after login in or registration
 
 # urls
-`http://127.0.0.1:8000/tasks/register/`(register)
-`http://127.0.0.1:8000/tasks/login/`(login)
-`http://127.0.0.1:8000/tasks/logout/`(logout)
-`http://127.0.0.1:8000/tasks/`     (lists tasks)
-`http://127.0.0.1:8000/tasks/home/`  (showes home/ require loged in user)
-`http://127.0.0.1:8000/tasks/create/`(creating new tasks)
-`http://127.0.0.1:8000/tasks/<int:pk>/`(viewing tasks details)
-`http://127.0.0.1:8000/tasks/<int:pk>/edit/`(editing task)
+`http://127.0.0.1:8000/tasks/register/`      (register)
+`http://127.0.0.1:8000/tasks/login/`         (login)
+`http://127.0.0.1:8000/tasks/logout/`        (logout)
+`http://127.0.0.1:8000/tasks/`               (lists tasks)
+`http://127.0.0.1:8000/tasks/home/`          (showes home/ require loged in user)
+`http://127.0.0.1:8000/tasks/create/`        (creating new tasks)
+`http://127.0.0.1:8000/tasks/<int:pk>/`      (viewing tasks details)
+`http://127.0.0.1:8000/tasks/<int:pk>/edit/` (editing task)
 `http://127.0.0.1:8000/tasks/<int:pk>/delete/`(deleting task)
+## API urls
+`http://127.0.0.1:8000/tasks/api/tasks/	 `                       (listtasks)
+`http://127.0.0.1:8000/tasks/api/tasks/create/`  	             (create Task)
+`http://127.0.0.1:8000/tasks/api/tasks/{id}/`                    (tasks detail)
+`http://127.0.0.1:8000/tasks/api/tasks/{id}/update/`	         (updating task)
+`http://127.0.0.1:8000/tasks/api/tasks/{id}/delete/`	         (deleting task)
+`http://127.0.0.1:8000/tasks/api/tasks/{id}/toggle-status/`   (checking status)
 
 # SETTINGS
 # redirects 
@@ -62,9 +69,3 @@ AUTHENTICATION_BACKENDS = [
  - **Task History**: Store task history to allow users to track completed tasks over time and retrieve a list of completed tasks.
  - **Notifications**: Implement email or in-app notifications to remind users about upcoming due dates or when a task is due soon.
 
- List Tasks	http://127.0.0.1:8000/api/tasks/	GET
-Create Task	http://127.0.0.1:8000/tasks/api/tasks/create/	POST
-Get Task Detail	http://127.0.0.1:8000/api/tasks/5/	GET
-Update Task	http://127.0.0.1:8000/tasks/api/tasks/5/update/	PUT/PATCH
-Delete Task	http://127.0.0.1:8000/api/tasks/5/delete/	DELETE
-Toggle Complete/Incomplete	http://127.0.0.1:8000/api/tasks/5/toggle-status/

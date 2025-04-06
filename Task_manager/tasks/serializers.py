@@ -25,6 +25,6 @@ class TaskSerializer(serializers.ModelSerializer):
         return value
     
     def update(self, instance, validated_data):
-        if instance.status:  # Task is marked complete
+        if instance.status  == 'Complete': # Task is marked complete
             raise serializers.ValidationError("Cannot update a completed task.")
         return super().update(instance, validated_data)

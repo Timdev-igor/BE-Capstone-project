@@ -10,7 +10,7 @@ from rest_framework import generics, permissions, filters, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.utils.timezone import now
-from rest_framework.exceptions import PermissionDenied
+
 
 # User Registration View
 def register(request):
@@ -156,16 +156,13 @@ class TaskCreateView(generics.CreateAPIView):
 
 
 # Task Update View
-class TaskUpdateView(generics.UpdateAPIView):
-    queryset = Task.objects.all()
-    serializer_class = TaskSerializer
-    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
 
-    def perform_update(self, serializer):
-        task = self.get_object()
-        if task.status == 'COMPLETE':  # You can replace 'COMPLETE' with the enum or constant
-            raise PermissionDenied("Cannot edit a completed task.")
-        serializer.save()
+class TaskUpdateView(generics.UpdateAPIView):
+    queryset = Task.objects.all()  # Queryset for all tasks
+    serializer_class = TaskSerializer  # The serializer class for validating input data
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]  # Permissions
+
+
 
 
 # Task Delete View
