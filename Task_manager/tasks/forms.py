@@ -6,7 +6,6 @@ from .models import CustomUser,Task  # Import the custom user model
 class CustomUserCreationForm(UserCreationForm):
     """
     A form for user registration using email 
-    - Extends Django's built-in UserCreationForm.
     - Requires email, password1 (new password), and password2 (password confirmation).
     """
     class Meta:

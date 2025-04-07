@@ -2,13 +2,9 @@ from django.contrib.auth.backends import BaseBackend
 from django.contrib.auth import get_user_model
 
 class EmailBackend(BaseBackend):
-    """
-    Custom authentication backend that allows users to log in using their email 
-    """
+
     def authenticate(self, request, email=None, password=None):
-        """
-        Authenticate a user based on email and password.
-        """
+
         User = get_user_model()                   # Get the custom user model
         try:
             user = User.objects.get(email=email)  # Retrieve user by email

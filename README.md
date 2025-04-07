@@ -65,4 +65,9 @@ AUTHENTICATION_BACKENDS = [
 - creating tasks api views
 - implemented urls
 
+# completed project
+- modified c codes for the web
+- deployed on python anywhere === `https://timothyandre.pythonanywhere.com/`
+- provided a 5 minute demo video on loom
+
 

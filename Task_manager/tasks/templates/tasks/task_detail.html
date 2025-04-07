@@ -7,7 +7,7 @@
     <h1 class="task-title">Task: {{ task.title }}</h1>
 
     <p><strong>Description:</strong> {{ task.description }}</p>
-    <p><strong>Status:</strong> {{ task.status_display }}</p>
+    <p><strong>Status:</strong> {{ task.get_status_display }}</p>
     <p><strong>Priority:</strong> {{ task.get_priority_display }}</p>
     <p><strong>Due Date:</strong> {{ task.due_date }}</p>
     <p><strong>Created At:</strong> {{ task.created_at }}</p>
