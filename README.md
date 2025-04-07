@@ -2,10 +2,12 @@
 This repo contains my BE capstone project(task management app)
 ## Task management app 
 STARTING PROJECT
-## WEEK 1//
-project= Task_manager
-app=tasks
-## WEEK 2  DEFINING USER MODELS AND AUTHENTICATION BACKENDS
+## -------WEEK 1----------//
+- created django project and app
+- project= Task_manager
+- app=tasks
+## ----------WEEK 2  DEFINING USER MODELS AND AUTHENTICATION BACKENDS---------
+
 ##  User Authentication Features
 - **Custom User Model** (Email-based authentication)
 - **User Registration**
@@ -19,24 +21,6 @@ app=tasks
 - created views for user creation (registration.html) and added url configurations
 - created login & logout views that use auths to login user
 - created homeview  where user is led after login in or registration
-
-# urls
-`http://127.0.0.1:8000/register/`      (register)
-`http://127.0.0.1:8000/login/`         (login)
-`http://127.0.0.1:8000/logout/`        (logout)
-`http://127.0.0.1:8000/`               (lists tasks)
-`http://127.0.0.1:8000/home/`          (showes home/ require loged in user)
-`http://127.0.0.1:8000/create/`        (creating new tasks)
-`http://127.0.0.1:8000/<int:pk>/`      (viewing tasks details)
-`http://127.0.0.1:8000/<int:pk>/edit/` (editing task)
-`http://127.0.0.1:8000/<int:pk>/delete/`(deleting task)
-## API urls
-`http://127.0.0.1:8000/api/tasks/	 `                       (listtasks)
-`http://127.0.0.1:8000/api/tasks/create/`  	             (create Task)
-`http://127.0.0.1:8000/api/tasks/{id}/`                    (tasks detail)
-`http://127.0.0.1:8000/api/tasks/{id}/update/`	         (updating task)
-`http://127.0.0.1:8000/api/tasks/{id}/delete/`	         (deleting task)
-
 
 # SETTINGS
 # redirects 
@@ -56,7 +40,9 @@ AUTHENTICATION_BACKENDS = [
 # directory for templates
 'DIRS': [BASE_DIR / "templates"], #show template directory
 
-# WEEK 3 defining a task model and categories /status /creating its views &urls
+
+# -------------WEEK 3 defining a task model and categories /status /creating its views &urls-----------
+
 # also define admin to manage users
 ` !!  I HAVE DECIDED TO MAKE CATEGORIES AS A FIELD RATHER THAN A MODEL  !!`
 - created tasks model with its fields in models.py
@@ -70,4 +56,26 @@ AUTHENTICATION_BACKENDS = [
 - deployed on python anywhere === `https://timothyandre.pythonanywhere.com/`
 - provided a 5 minute demo video on loom
 
+
+# urls
+`http://127.0.0.1:8000/register/`      (register)
+`http://127.0.0.1:8000/login/`         (login)
+`http://127.0.0.1:8000/logout/`        (logout)
+`http://127.0.0.1:8000/`               (lists tasks)
+`http://127.0.0.1:8000/home/`          (showes home/ require loged in user)
+`http://127.0.0.1:8000/create/`        (creating new tasks)
+`http://127.0.0.1:8000/<int:pk>/`      (viewing tasks details)
+`http://127.0.0.1:8000/<int:pk>/edit/` (editing task)
+`http://127.0.0.1:8000/<int:pk>/delete/`(deleting task)
+## API urls
+`http://127.0.0.1:8000/api/tasks/	 `                       (listtasks)
+`http://127.0.0.1:8000/api/tasks/create/`  	             (create Task)
+`http://127.0.0.1:8000/api/tasks/{id}/`                    (tasks detail)
+`http://127.0.0.1:8000/api/tasks/{id}/update/`	         (updating task)
+`http://127.0.0.1:8000/api/tasks/{id}/delete/`	         (deleting task)
+
+
+
+ **For use after deployment use example**
+   use `https://timothyandre.pythonanywhere.com/` as the host
 
