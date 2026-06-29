@@ -8,7 +8,7 @@ class TaskSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ('user', 'created_at', 'updated_at')
 
-     # Custom validation to ensure the due date isin the future.
+     # Custom validation to ensure the due date is in the future.
     def validate_due_date(self, value):
         if value is not None and value <= datetime.now():
             raise serializers.ValidationError("Due date should be in the future")
